@@ -36,11 +36,19 @@ CREATE TABLE clinica.consulta (
 	id_consulta INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 	data TIMESTAMPTZ NOT NULL,
 	valor NUMERIC (10, 4),
-	id_medico INT NOT NULL,
 	--maneira extensa
+	id_medico INT NOT NULL,
 	FOREIGN KEY (id_medico) 
 	REFERENCES clinica.medico(id_medico),
 	--maneira abreviada
 	id_clinica INT NOT NULL REFERENCES clinica.clinica(id_clinica),
 	id_paciente INT NOT NULL REFERENCES clinica.paciente(id_paciente)
-)
+);
+
+-- APAGAR TABELA - DROP
+/*
+DROP TABLE clinica.consulta;
+DROP TABLE clinica.clinica;
+DROP TABLE clinica.paciente;
+DROP TABLE clinica.medico;
+*/
