@@ -3,8 +3,10 @@
 COMENTARIO MULTIPLAS LINHAS 
 */
 
+SET search_path TO clinica;
+
 -- DDL - CRIAR - CREATE (SCHEMA, TABELA)
-CREATE SCHEMA clinica;
+CREATE SCHEMA clinica IF NOT EXISTS;
 
 -- CREATE TABLE <SCHEMA>.<NOME_DA_TABELA>
 CREATE TABLE clinica.medico (
@@ -45,6 +47,21 @@ CREATE TABLE clinica.consulta (
 	id_paciente INT NOT NULL REFERENCES clinica.paciente(id_paciente)
 );
 
+-- TRUNCATE - LIMPA A TABELA
+TRUNCATE TABLE clinica.consulta RESTART IDENTITY;
+
+-- ALTER - ALTERAR TABELA
+ALTER TABLE clinica.paciente ADD COLUMN cpf VARCHAR(14) UNIQUE;
+-- UNIQUE IMPEDE CADASTRO REPETIDO
+
+-- APAGAR COLUNA
+ALTER TABLE clinica.paciente
+DROP COLUMN cpf;
+
+-- RENOMEAR TABELA
+ALTER TABLE clinica.paciente
+RENAME TO novopaciente;
+
 -- APAGAR TABELA - DROP
 /*
 DROP TABLE clinica.consulta;
@@ -52,3 +69,4 @@ DROP TABLE clinica.clinica;
 DROP TABLE clinica.paciente;
 DROP TABLE clinica.medico;
 */
+
