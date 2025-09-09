@@ -1,9 +1,6 @@
 package br.com.ecommerce.api.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +12,7 @@ import java.time.OffsetDateTime;
 @Table(name = "cliente", schema = "ecommerce")
 public class Cliente {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cliente_id", nullable = false)
     private Integer id;
 

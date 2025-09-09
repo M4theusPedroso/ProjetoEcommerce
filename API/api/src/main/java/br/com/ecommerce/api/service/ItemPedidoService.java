@@ -18,4 +18,8 @@ public class ItemPedidoService {
         return itemPedidoRepository.findAll();
     }
 
+    public ItemPedido cadastrarItemPedido(ItemPedido itemPedido) {
+        return itemPedidoRepository.save(itemPedido);
+    }
 }
+
