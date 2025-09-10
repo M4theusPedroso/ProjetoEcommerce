@@ -28,4 +28,17 @@ public class ProdutoController {
         produtoService.cadastroProduto(produto);
         return ResponseEntity.status(HttpStatus.CREATED).body(produto);
     }
+
+    //buscar cliente por id
+    @GetMapping("/{id}")
+    public ResponseEntity<?> buscarProdutoPorId(@PathVariable Integer id) {
+        //1. procurar o cliente
+        Produto produto = produtoService.buscarPorId(id);
+        //2.se eu nao encontrar, retorno erro
+        if (produto == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto " + id + "nao encontrado!");
+        }
+        //3. se encontrar, retorno o cliente
+        return ResponseEntity.ok(produto);
+    }
 }
