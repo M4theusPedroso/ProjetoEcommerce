@@ -37,4 +37,35 @@ public class ClienteController {
         //return ResponseEntity.created(cliente);
         return ResponseEntity.status(HttpStatus.CREATED).body(cliente);
     }
+
+    //buscar cliente por id
+    @GetMapping("/{id}")
+    //Path Variable -> recebe um valor no link
+    public ResponseEntity<?> buscarClientePorId(@PathVariable Integer id) {
+        //1. procurar o cliente
+        Cliente cliente = clienteService.buscarPorId(id);
+        //2. se eu nao encontrar, retorno erro
+        if (cliente == null) {
+            //mais simples:
+            //return ResponseEntity.notFound().build();
+            //mais detalhes:
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente " + id + "nao encontrado!");
+        }
+
+        //3. se encontrar, retorno o cliente
+        return ResponseEntity.ok(cliente);
+    }
+
+    // get, post, put, delete
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletarCliente(@PathVariable Integer id) {
+        //1. verificar se o cliente existe
+        Cliente cliente = clienteService.deletarCliente(id);
+        //2. se nao existir  retorno erro
+        if (cliente == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente " + id + "naoencontrado!");
+        }
+        //3. se existir retorno ok
+        return ResponseEntity.ok(cliente);
+    }
 }

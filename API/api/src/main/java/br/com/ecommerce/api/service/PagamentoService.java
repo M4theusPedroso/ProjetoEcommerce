@@ -17,4 +17,8 @@ public class PagamentoService {
     public List<Pagamento> listarTodos() {
         return pagamentoRepository.findAll();
     }
+
+    public Pagamento cadastrarPagamento(Pagamento pag) {
+        return pagamentoRepository.save(pag);
+    }
 }
