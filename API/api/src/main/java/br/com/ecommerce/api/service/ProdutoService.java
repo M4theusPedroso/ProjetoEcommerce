@@ -26,6 +26,7 @@ public class ProdutoService {
         return produtoRepository.findById(id).orElse(null);
     }
 
+    //deletar
     public Produto deleteProduto(Integer id) {
         //1. verificar se o cliente existe
         Produto produto = buscarPorId(id);

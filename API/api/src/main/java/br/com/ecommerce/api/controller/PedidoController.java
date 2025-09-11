@@ -27,4 +27,33 @@ public class PedidoController {
         pedidoService.cadastrarPedido(pedido);
         return ResponseEntity.status(HttpStatus.CREATED).body(pedido);
     }
+
+    //buscar pedido por id
+    @GetMapping("/{id}")
+    //path variable - recebe um valor no link
+    public ResponseEntity<?> buscarPedidoPorId(@PathVariable Integer id) {
+        //1. procurar pedido
+        Pedido pedido = pedidoService.buscarPorId(id);
+        //2. se nao encontrar, retorno erro
+        if (pedido == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pedido " + id + "naoencontrado!");
+        }
+        //3. se encontrar, retorno o cliente
+        return ResponseEntity.ok(pedido);
+    }
+
+    //delete
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletarPedidoPorId(@PathVariable Integer id) {
+        //1. verificar se o pedido existe
+        Pedido pedido = pedidoService.buscarPorId(id);
+        //2. se nao existir retorno erro
+        if (pedido == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pedido " + id + "naoencontrado!");
+        }
+        //3. se existir retorno ok
+        return ResponseEntity.ok(pedido);
+
+    }
+
 }

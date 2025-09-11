@@ -21,5 +21,22 @@ public class ItemPedidoService {
     public ItemPedido cadastrarItemPedido(ItemPedido itemPedido) {
         return itemPedidoRepository.save(itemPedido);
     }
+
+    //1. buscar por id
+    public ItemPedido buscarPorId(Integer id) {
+        return itemPedidoRepository.findById(id).orElse(null);
+    }
+    //2. deletar cliente
+    public ItemPedido deletarCliente(Integer id) {
+        //1. verificar se o cliente existe
+        ItemPedido itemPedido = buscarPorId(id);
+        //2. se nao existir, retorno nulo
+        if (itemPedido == null) {
+            return null;
+        }
+        //3. se existir, excluo
+        itemPedidoRepository.delete(itemPedido);
+        return itemPedido;
+    }
 }
 

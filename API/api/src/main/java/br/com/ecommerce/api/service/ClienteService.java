@@ -40,4 +40,20 @@ public class ClienteService {
         clienteRepository.delete(cliente);
         return cliente;
     }
+
+    //ATUALIZAR
+    public Cliente atualizarCliente(Integer id, Cliente clienteNovo) {
+        //1. procurar quem eu quero atualizar
+        Cliente clienteAntigo = buscarPorId(id);
+        //2. se eu nao achar, retorno nulo
+        if (clienteAntigo == null) {
+            return null;
+        }
+        //3. se eu achar o cliente eu atualizo
+        clienteAntigo.setSenha(clienteNovo.getSenha());
+        clienteAntigo.setEmail(clienteNovo.getEmail());
+        clienteAntigo.setDataCadastro(clienteNovo.getDataCadastro());
+        clienteAntigo.setTelefone(clienteNovo.getTelefone());
+        return clienteRepository.save(clienteAntigo);
+    }
 }

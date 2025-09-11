@@ -41,4 +41,17 @@ public class ProdutoController {
         //3. se encontrar, retorno o cliente
         return ResponseEntity.ok(produto);
     }
+
+    //delete
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletarProdutoPorId(@PathVariable Integer id) {
+        //verificar
+        Produto produto = produtoService.deleteProduto(id);
+        //retorno
+        if (produto == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto " + id + "nao encontrado!");
+        }
+        //se existir retorno
+        return ResponseEntity.ok(produto);
+    }
 }

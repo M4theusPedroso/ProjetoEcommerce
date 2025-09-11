@@ -28,4 +28,33 @@ public class ItemPedidoController {
         itemPedidoService.cadastrarItemPedido(itemPedido);
         return ResponseEntity.status(HttpStatus.CREATED).body(itemPedido);
     }
+
+    @GetMapping("/{id}")
+    //Path variable -> recebe um valor no link
+    public ResponseEntity<?> buscarClientePorId(@PathVariable Integer id) {
+        //1. procurar o cliente
+        ItemPedido itemPedido = itemPedidoService.buscarPorId(id);
+        //2. se eu nao encontrar, retorno erro
+        if (itemPedido == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Item Pedido " + id + "nao encontrado!");
+        }
+
+        //3. se encontrar, retorno o cliente
+        return ResponseEntity.ok(itemPedido);
+
+        }
+
+        //get, post, put, delete
+        @DeleteMapping("/{id}")
+        public ResponseEntity<?> deletarItemPedido(@PathVariable Integer id) {
+        //1. verificar se o item existe
+        ItemPedido itemPedido = itemPedidoService.buscarPorId(id);
+        //2. se nao existir, retorno erro
+        if (itemPedido == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Item Pedido " + id + "nao encontrado!");
+        }
+        //3. se existir retorno ok
+            return ResponseEntity.ok(itemPedido);
+
+        }
 }
