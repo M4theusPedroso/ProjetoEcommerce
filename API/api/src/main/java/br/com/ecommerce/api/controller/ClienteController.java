@@ -2,6 +2,8 @@ package br.com.ecommerce.api.controller;
 
 import br.com.ecommerce.api.model.Cliente;
 import br.com.ecommerce.api.service.ClienteService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/clientes")
+@Tag(name = "Controller de Cliente", description = "Metodos de Clientes")
 public class ClienteController {
     // Controller -> Service
     private final ClienteService clienteService;
@@ -20,6 +23,10 @@ public class ClienteController {
 
     // listar todos
     @GetMapping
+    @Operation(
+            summary = "Lista todos os clientes",
+            description = "Lista todos os clientes sem nenhuma restricao"
+    )
     public ResponseEntity<List<Cliente>> ListarClientes() {
         //1 - pegar a lista de clientes
         List<Cliente> clientes = clienteService.listarTodos();
@@ -69,6 +76,7 @@ public class ClienteController {
         return ResponseEntity.ok(cliente);
     }
 
+    //CADASTRAR
     @PutMapping("/{id}")
     public ResponseEntity<?> atualizarCliente(@PathVariable Integer id, @RequestBody Cliente clienteNovo) {
         //1. procuro o cliente, tento atualizar o cliente

@@ -38,5 +38,20 @@ public class ItemPedidoService {
         itemPedidoRepository.delete(itemPedido);
         return itemPedido;
     }
+
+    //ATUALIZAR
+    public ItemPedido atualizarItemPedido(Integer id, ItemPedido novoItemPedido) {
+        //1. procurar o que eu quero atualizar
+        ItemPedido itemPedidoAntigo = buscarPorId(id);
+        //2. se eu nao achar, retorno nulo
+        if (itemPedidoAntigo == null) {
+            return null;
+        }
+        //3. se eu achar o pedido eu atualizo
+        itemPedidoAntigo.setPedido(novoItemPedido.getPedido());
+        itemPedidoAntigo.setProduto(novoItemPedido.getProduto());
+        itemPedidoAntigo.setQuantidade(novoItemPedido.getQuantidade());
+        return itemPedidoRepository.save(itemPedidoAntigo);
+    }
 }
 

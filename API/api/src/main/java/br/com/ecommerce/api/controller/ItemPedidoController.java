@@ -57,4 +57,17 @@ public class ItemPedidoController {
             return ResponseEntity.ok(itemPedido);
 
         }
+
+        //CADASTRAR
+        @PutMapping("/{id}")
+        public ResponseEntity<?> atualizarItemPedido(@PathVariable Integer id, @RequestBody ItemPedido novoItemPedido) {
+            //1. procuro cliente, tento atualizar
+            ItemPedido item1 = itemPedidoService.atualizarItemPedido(id, novoItemPedido);
+            //2. se nao achar o item, mostro erro
+            if (item1 == null) {
+                return ResponseEntity.status(404).body("Pedido nao encontrado!");
+            }
+            //3. se achar retorno ok
+            return ResponseEntity.ok(item1);
+        }
 }

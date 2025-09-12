@@ -22,7 +22,7 @@ public class PagamentoService {
         return pagamentoRepository.save(pag);
     }
 
-    // buscar cadastro por id
+    // buscar pagamento por id
     public Pagamento buscarPorId(int id) {
         //1. verificar se o pagamento existe
         Pagamento pagamento = buscarPorId(id);
@@ -34,4 +34,7 @@ public class PagamentoService {
         pagamentoRepository.delete(pagamento);
         return pagamento;
     }
+
+    //ATUALIZAR
+    
 }
